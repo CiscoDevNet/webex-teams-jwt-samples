@@ -16,5 +16,9 @@ See background information on the Webex Teams [persistent guest issuer](https://
     ```shell
     npm install
     ```
+* Install Python v3 dependencies:
+    ```shell
+    pip install requests pyjwt
+    ```
 * Put guest issuer id/secret in `secrets.json`
 * Be sure to launch the .py and .js files with the appropriate VS Code launch config
