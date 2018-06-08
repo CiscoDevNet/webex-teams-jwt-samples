@@ -1,5 +1,5 @@
 {
-  "name": "test_guest",
+  "name": "webex-teams-jwt-samples",
   "version": "1.0.0",
   "description": "",
   "main": "jwt_native.js",
