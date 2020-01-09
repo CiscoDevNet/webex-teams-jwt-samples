@@ -1,12 +1,6 @@
 /* 
 Create and authenticate a Cisco Webex Teams JWT using JavaScript and jsonwebtoken
 
-Script Dependencies:
-    (see package.json)
-
-Depencency Installation:
-    $ npm install
-
 Copyright (c) 2018 Cisco and/or its affiliates.
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,27 +19,33 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. 
 */
 
+// Load secrets from .env file into environment, if not already existing
+require( 'dotenv' ).config();
+
 const jwt = require('jsonwebtoken');
 const request = require('request-promise-native');
 
-const secrets = require('./secrets.json'); //Put guest issuer id/secret in secrets.json
-
 const expiration = Math.floor(new Date() / 1000) + 3600 // 1 hour from now
 
-// 'sub'/subject will be use to create the Webex Teams user email (sub@org-uuid)
+// Create a JWT payload object
+// 'sub' (subject) will be used to create the Webex Teams user email (sub@org-uuid)
 // 'name' will be the user's display name 
 const payload = {
     'sub': 'testUser1',
     'name': 'testName1',
-    'iss': secrets.WEBEX_TEAMS_ISSUER_ID,
+    'iss': process.env.WEBEX_TEAMS_ISSUER_ID,
     'exp': expiration
 };
 
-const decoded = Buffer.from(secrets.WEBEX_TEAMS_ISSUER_SECRET, 'base64');
+// Create a base64 encoded buffer from the Guest Issuer shared secret
+const encoded = Buffer.from(process.env.WEBEX_TEAMS_ISSUER_SECRET, 'base64');
 
-const jwtToken = jwt.sign(payload, decoded, { algorithm: 'HS256', noTimestamp: true });
+// Sign the JWT object using the encoded secret
+const jwtToken = jwt.sign(payload, encoded, { algorithm: 'HS256', noTimestamp: true });
+
 console.log(jwtToken);
 
+// Exchange the signed JWT for an access token
 request.post({
     uri: 'https://api.ciscospark.com/v1/jwt/login',
     headers: { 'Authorization': 'Bearer ' + jwtToken }
