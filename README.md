@@ -54,3 +54,4 @@ See background information on the Webex Teams [Guest Issuer](https://developer.w
 
     1. Open the sample `.js` or `.py` file you wish to run, and launch by pressing --F5--, or by opening the Debugging panel and clicking the green 'Run' button
 
+[![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/webex-teams-jwt-samples)
