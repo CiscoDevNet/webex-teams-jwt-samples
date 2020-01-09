@@ -25,12 +25,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+// Load secrets from .env file into environment, if not already existing
+require( 'dotenv' ).config();
+
 const base64url = require('base64url');
 const crypto = require('crypto');
 const request = require('request-promise-native');
 
-const secrets = require('./secrets.json'); //Put guest issuer id/secret in secrets.json
-
+// Create a JWT header object - HMAC SHA256/JWT are always used
 const header = {
     'alg': 'HS256',
     'typ': 'JWT'
@@ -38,30 +40,38 @@ const header = {
 
 const expiration = Math.floor(new Date() / 1000) + 3600 // 1 hour from now
 
-// 'sub'/subject will be use to create the Webex Teams user email (sub@org-uuid)
+// Create a JWT payload object
+// 'sub' (subject) will be use to create the Webex Teams user email (sub@org-uuid)
 // 'name' will be the user's display name 
 const payload = {
     'sub': 'testUser1',
     'name': 'testName1',
-    'iss': secrets.WEBEX_TEAMS_ISSUER_ID,
+    'iss': process.env.WEBEX_TEAMS_ISSUER_ID,
     'exp': expiration
 };
 
+// Base64 encode header and payload, concatenate with '.'
 const header_b64 = base64url(JSON.stringify(header), 'utf8');
 
 const payload_b64 = base64url(JSON.stringify(payload));
 
 const content = header_b64 + '.' + payload_b64;
 
-const jwtSecret = Buffer.from(secrets.WEBEX_TEAMS_ISSUER_SECRET, 'base64');
+// Create a base64 encoded buffer from the Guest Issuer shared secret
+const jwtSecret = Buffer.from(process.env.WEBEX_TEAMS_ISSUER_SECRET, 'base64');
 
-const hmac = crypto.createHmac('sha256', jwtSecret);
+// Instantiate a HMAC crypto hash using the Guest Issuer shared secret
+const hash = crypto.createHmac('sha256', jwtSecret);
 
-const signature = hmac.update(content).digest('base64');
+// Create a signature using the HMAC object and the JWT content
+const signature = hash.update(content).digest('base64');
 
+// Append the signature to the content with '.'
 const jwtToken = content + '.' + signature;
+
 console.log(jwtToken);
 
+// Exchange the signed JWT for an access token
 request.post({
     uri: 'https://api.ciscospark.com/v1/jwt/login',
     headers: { 'Authorization': 'Bearer ' + jwtToken }
