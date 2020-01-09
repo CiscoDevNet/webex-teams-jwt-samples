@@ -24,8 +24,8 @@ See background information on the Webex Teams [Guest Issuer](https://developer.w
 - (Optional) create and activate a Python3 virtual environment:
 
     ```shell
-    python3 -m venv .venv
-    .venv/bin/activate
+    python3 -m venv env
+    source env/bin/activate
     ```
 
 - Install Python3 dependencies:
@@ -46,9 +46,9 @@ See background information on the Webex Teams [Guest Issuer](https://developer.w
 
         - Paste in your Webex Teams Guest Issuer ID and shared secret (save the file)
 
-        - (Optional) Paste in your app's publically reachable URL.  If not specified, the app will use Ngrok to dynamically create a reverse tunnel instead (see caveats in [Hints](#hints) below)
-
         - Be sure to save the file
+
+        >Alternatively: use environment variables to specify `WEBEX_TEAMS_ISSUER_ID` and `WEBEX_TEAMS_ISSUER_SECRET`
 
     1. Open the sample `.js` or `.py` file you wish to run, and launch by pressing --F5--, or by opening the Debugging panel and clicking the green 'Run' button
 
