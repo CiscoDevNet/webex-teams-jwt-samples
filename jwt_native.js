@@ -1,12 +1,6 @@
 /*
 Create and authenticate a Cisco Webex Teams JWT using native JavaScript
 
-Script Dependencies:
-    (see package.json)
-
-Depencency Installation:
-    $ npm install
-
 Copyright (c) 2018 Cisco and/or its affiliates.
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

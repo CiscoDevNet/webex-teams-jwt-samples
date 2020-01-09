@@ -1,5 +1,7 @@
 # webex-teams-jwt-samples
 
+## Overview
+
 Python and JavaScript sample project for [Visual Studio Code](https://code.visualstudio.com/) showing how to build and authenticate JSON Web Tokens for Cisco Webex Teams.  
 
 Includes 'native' and popular-library examples ([PyJWT](https://pyjwt.readthedocs.io/en/latest/) / [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken))

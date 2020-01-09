@@ -1,13 +1,5 @@
-# Create and authenticate a Cisco Webex Teams JWT using native Python
-#
-# Script Dependencies:
-#     Python v3
-#     requests
-#     pyjwt
-#
-# Depencency Installation:
-#     $ pip install requests pyjwt
-#
+# Create and authenticate a Cisco Webex Teams JWT using the PyJWT library
+
 # Copyright (c) 2018 Cisco and/or its affiliates.
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the 'Software'), to deal
