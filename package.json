@@ -1,17 +1,27 @@
 {
   "name": "webex-teams-jwt-samples",
-  "version": "1.0.0",
-  "description": "",
-  "main": "jwt_native.js",
+  "version": "1.0.1",
+  "description": "## Overview",
+  "main": "jwt_jsonwebtoken.js",
+  "dependencies": {
+    "base64url": "^3.0.1",
+    "dotenv": "^8.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "request": "^2.88.2",
+    "request-promise-native": "^1.0.8"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CiscoDevNet/webex-teams-jwt-samples.git"
+  },
   "author": "dstaudt@cisco.com",
   "license": "MIT",
-  "dependencies": {
-    "dotenv": "^8.2.0",
-    "jsonwebtoken": "^8.5.1",
-    "request-promise-native": "^1.0.8"
-  }
+  "bugs": {
+    "url": "https://github.com/CiscoDevNet/webex-teams-jwt-samples/issues"
+  },
+  "homepage": "https://github.com/CiscoDevNet/webex-teams-jwt-samples#readme"
 }
